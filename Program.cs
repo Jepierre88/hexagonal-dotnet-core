@@ -6,12 +6,13 @@ builder.Services.AddApplication();
 
 builder.Services.AddControllers();
 
+builder.Services.AddRazorPages()
+    .WithRazorPagesRoot("/src/infrastructure/adapters/in/razor");
 
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
-
 app.MapControllers();
+app.MapRazorPages();
 
 app.Run();

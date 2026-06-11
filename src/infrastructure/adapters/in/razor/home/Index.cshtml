@@ -1,0 +1,24 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Hola mundo</h1>
+
+@if(Model.Saludos is null){
+    <p>Cargando saludos...</p>
+}
+else{
+<ul>
+    @foreach (var saludo in Model.Saludos)
+    {
+        <li>@saludo</li>
+    }
+</ul>
+}
+
+<form method="post">
+    <input type="text" asp-for="Nombre" />
+    <button type="submit">Enviar</button>
+</form>
