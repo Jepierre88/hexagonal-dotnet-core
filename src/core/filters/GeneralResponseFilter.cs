@@ -27,7 +27,7 @@ public class GeneralResponseAttribute : ActionFilterAttribute
         "An error occurred while processing your request.",
         null,
         false,
-        System.Net.HttpStatusCode.InternalServerError
+        HttpStatusCode.InternalServerError
       );
       context.Result = new ObjectResult(response)
       {
