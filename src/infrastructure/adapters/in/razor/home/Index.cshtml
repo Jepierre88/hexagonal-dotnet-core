@@ -14,6 +14,9 @@
     <li><strong>POST</strong> <code>/api/auth/login</code></li>
     <li><strong>GET</strong> <code>/api/auth/me</code></li>
     <li><strong>GET</strong> <code>/api/hello?name=TuNombre</code></li>
+  <li><strong>GET</strong> <code>/api/admin/users</code></li>
+  <li><strong>POST</strong> <code>/api/admin/users/{userId}/roles</code></li>
+  <li><strong>GET</strong> <code>/api/admin/health</code></li>
     <li><strong>GET</strong> <code>/api/health</code></li>
 </ul>
 
@@ -31,3 +34,10 @@
 
 <h2>Usar el token</h2>
 <p>Envia el token devuelto en el header <code>Authorization: Bearer &lt;token&gt;</code> para acceder a <code>/api/auth/me</code> o <code>/api/hello</code>.</p>
+
+<h2>RBAC nativo</h2>
+<p>Al registrarse, cada usuario recibe el rol <code>User</code>. La aplicacion tambien crea un usuario administrador de desarrollo al arrancar.</p>
+<pre>{
+  "email": "admin@apibasica.local",
+  "password": "Admin123$"
+}</pre>

@@ -1,6 +1,7 @@
 using System.Net;
 using Application.Ports.In;
 using Core.Filters;
+using Infrastructure.Adapters.Out.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,12 +21,19 @@ public class ApplicationController(IHelloWorldPort helloWorldPort) : ControllerB
     }
 
     [HttpGet("hello")]
-        [Authorize]
+        [Authorize(Roles = AppRoles.User + "," + AppRoles.Admin)]
     [GeneralResponse("Saludo generado correctamente", HttpStatusCode.Created)]
     public IActionResult SayHello([FromQuery] string name)
     {
         var greeting = _helloWorldPort.SayHello(name);
         return Ok(greeting);
+    }
+
+    [HttpGet("admin/health")]
+    [Authorize(Policy = AuthorizationPolicies.RequireAdminRole)]
+    public IActionResult AdminHealth()
+    {
+        return Ok(new { status = "Admin healthy" });
     }
 
 }

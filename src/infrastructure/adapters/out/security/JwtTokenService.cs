@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Domain.Iam;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -9,14 +10,14 @@ namespace Infrastructure.Adapters.Out.Security;
 
 public interface IJwtTokenService
 {
-    string CreateToken(IdentityUser user, IEnumerable<Claim> claims);
+    string CreateToken(AppUser user, IEnumerable<Claim> claims);
 }
 
 public sealed class JwtTokenService(IOptions<JwtOptions> jwtOptions) : IJwtTokenService
 {
     private readonly JwtOptions _jwtOptions = jwtOptions.Value;
 
-    public string CreateToken(IdentityUser user, IEnumerable<Claim> claims)
+    public string CreateToken(AppUser user, IEnumerable<Claim> claims)
     {
         var tokenClaims = new List<Claim>
         {
@@ -43,3 +44,4 @@ public sealed class JwtTokenService(IOptions<JwtOptions> jwtOptions) : IJwtToken
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }
+
