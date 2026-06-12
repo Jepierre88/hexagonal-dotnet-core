@@ -1,24 +1,33 @@
 @page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "JWT Auth";
 }
 
-<h1>Hola mundo</h1>
+<h1>Identity con JWT</h1>
 
-@if(Model.Saludos is null){
-    <p>Cargando saludos...</p>
-}
-else{
+<p>La autenticacion web con cookies fue reemplazada por autenticacion Bearer JWT usando ASP.NET Core Identity para usuarios y contrasenas.</p>
+
+<h2>Endpoints</h2>
 <ul>
-    @foreach (var saludo in Model.Saludos)
-    {
-        <li>@saludo</li>
-    }
+    <li><strong>POST</strong> <code>/api/auth/register</code></li>
+    <li><strong>POST</strong> <code>/api/auth/login</code></li>
+    <li><strong>GET</strong> <code>/api/auth/me</code></li>
+    <li><strong>GET</strong> <code>/api/hello?name=TuNombre</code></li>
+    <li><strong>GET</strong> <code>/api/health</code></li>
 </ul>
-}
 
-<form method="post">
-    <input type="text" asp-for="Nombre" />
-    <button type="submit">Enviar</button>
-</form>
+<h2>Registro</h2>
+<pre>{
+  "email": "dev@local.test",
+  "password": "Pass123$"
+}</pre>
+
+<h2>Login</h2>
+<pre>{
+  "email": "dev@local.test",
+  "password": "Pass123$"
+}</pre>
+
+<h2>Usar el token</h2>
+<p>Envia el token devuelto en el header <code>Authorization: Bearer &lt;token&gt;</code> para acceder a <code>/api/auth/me</code> o <code>/api/hello</code>.</p>

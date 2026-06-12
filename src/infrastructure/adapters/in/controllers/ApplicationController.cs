@@ -1,6 +1,7 @@
 using System.Net;
 using Application.Ports.In;
 using Core.Filters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Insfrastructure.Adapters.In;
@@ -12,12 +13,14 @@ public class ApplicationController(IHelloWorldPort helloWorldPort) : ControllerB
     private readonly IHelloWorldPort _helloWorldPort = helloWorldPort;
 
   [HttpGet("health")]
+        [AllowAnonymous]
     public IActionResult Health()
     {
         return Ok("Healthy");
     }
 
     [HttpGet("hello")]
+        [Authorize]
     [GeneralResponse("Saludo generado correctamente", HttpStatusCode.Created)]
     public IActionResult SayHello([FromQuery] string name)
     {
